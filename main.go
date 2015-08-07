@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -10,6 +11,12 @@ import (
 var flagListen = flag.String("listen", ":8080", "socket address to listen to")
 
 func main() {
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "simplehttpserver [flags] [<document root>]\n")
+		fmt.Fprintf(os.Stderr, "  If <document root> is not given, current directory is used.\n\n")
+		fmt.Fprintf(os.Stderr, "Flags:\n")
+		flag.PrintDefaults()
+	}
 	flag.Parse()
 
 	var dir string
